@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -18,6 +19,7 @@ class InteractivePlayer extends StatefulWidget {
 
 class _InteractivePlayerState extends State<InteractivePlayer> {
   late VideoPlayerController _videoController;
+  late ChewieController _chewieController;
 
   late InteractiveEntity currentData;
 
@@ -37,6 +39,25 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
 
     _videoController.initialize().then((_) {
       setState(() {});
+
+      _chewieController = ChewieController(
+        videoPlayerController: _videoController,
+        aspectRatio: _videoController.value.aspectRatio,
+        autoInitialize: false,
+        autoPlay: false,
+        looping: false,
+        allowFullScreen: true,
+        allowMuting: true,
+        errorBuilder: (context, errorMessage) {
+          return Center(
+            child: Text(
+              errorMessage,
+              style: const TextStyle(color: Colors.white),
+            ),
+          );
+        },
+      );
+
       _videoController.play();
     });
 
@@ -45,7 +66,7 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
 
   void videoStatus() {
     if (_videoController.value.position >= _videoController.value.duration) {
-      if (currentData.isFinal) {
+      if (currentData.isLast) {
         return;
       }
       askInput(context, res: currentData);
@@ -55,6 +76,7 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
   void changeVideo(String url) {
     _videoController.pause();
     _videoController.removeListener(videoStatus);
+    _chewieController.dispose();
     _videoController.dispose();
     initVideoController(url);
   }
@@ -63,9 +85,11 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: VideoPlayerItem(
-          controller: _videoController,
-        ),
+        child: _videoController.value.isInitialized
+            ? VideoPlayerItem(
+                controller: _chewieController,
+              )
+            : const Center(child: CircularProgressIndicator()),
       ),
     );
   }
