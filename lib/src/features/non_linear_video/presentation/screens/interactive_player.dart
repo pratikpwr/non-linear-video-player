@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../domain/entities/interaction_entity.dart';
 import '../widgets/video_player_item.dart';
 
 class InteractivePlayer extends StatefulWidget {
-  const InteractivePlayer({super.key});
+  const InteractivePlayer({
+    super.key,
+    required this.data,
+  });
+
+  final InteractiveEntity data;
 
   @override
   State<InteractivePlayer> createState() => _InteractivePlayerState();
@@ -13,12 +19,15 @@ class InteractivePlayer extends StatefulWidget {
 class _InteractivePlayerState extends State<InteractivePlayer> {
   late VideoPlayerController _videoController;
 
+  late InteractiveEntity currentData;
+
   @override
   void initState() {
     super.initState();
 
+    currentData = widget.data;
     initVideoController(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      widget.data.videoUrl,
     );
   }
 
@@ -36,7 +45,10 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
 
   void videoStatus() {
     if (_videoController.value.position >= _videoController.value.duration) {
-      askInput(context);
+      if (currentData.isFinal) {
+        return;
+      }
+      askInput(context, res: currentData);
     }
   }
 
@@ -58,7 +70,10 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
     );
   }
 
-  askInput(BuildContext context) {
+  void askInput(
+    BuildContext context, {
+    required InteractiveEntity res,
+  }) {
     if (_hasAlreadyDialog(context)) {
       Navigator.of(context).pop();
     }
@@ -66,28 +81,23 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Alert'),
-          content: const Text('Video has ended'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                changeVideo(
-                  'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-                );
-                Navigator.of(context).pop();
-              },
-              child: const Text('Bees'),
-            ),
-            TextButton(
-              onPressed: () {
-                changeVideo(
-                  'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-                );
-                Navigator.of(context).pop();
-              },
-              child: const Text('Butterfly'),
-            ),
-          ],
+          title: const Text('Choose your option'),
+          content: Text(res.question ?? ''),
+          actions: List.generate(
+            res.options.length,
+            (index) {
+              return TextButton(
+                onPressed: () {
+                  changeVideo(res.options[index].videoUrl);
+                  setState(() {
+                    currentData = res.options[index];
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: Text(res.options[index].title),
+              );
+            },
+          ),
         );
       },
     );
