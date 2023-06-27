@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:non_linear_videos/src/ui/organisms/interactive_player/screen/interactive_player_with_history.dart';
 
 import '../../../../core/injector/injection_container.dart';
-import '../../../../ui/organisms/interactive_player/screen/interactive_player.dart';
+import '../../../../ui/organisms/interactive_player/screen/interactive_player_with_history.dart';
 import '../cubits/football_manager_trailer/football_manager_trailer_cubit.dart';
 
 class FootBallManagerTrailer extends StatelessWidget {

@@ -21,8 +21,11 @@ void interactionInputDialog(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(res.question ?? '',
-                  style: context.textTheme.titleLarge?.copyWith(fontSize: 20)),
+              Text(
+                res.question ?? '',
+                style: context.textTheme.titleLarge?.copyWith(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
               padding12,
               Text('Choose your option', style: context.textTheme.titleMedium),
               padding8,

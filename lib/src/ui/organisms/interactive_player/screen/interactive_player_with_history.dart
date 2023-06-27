@@ -46,8 +46,14 @@ class InteractionPlayerWithHistory extends StatelessWidget {
                   title: Text(interaction.title),
                   subtitle: Text(interaction.question ?? ''),
                   trailing: TextButton(
-                    child: const Text('Watch', style: TextStyle(fontSize: 16)),
+                    child: Text(
+                      state.currentInteraction == interaction
+                          ? 'Playing'
+                          : 'Watch',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                     onPressed: () {
+                      if (state.currentInteraction == interaction) return;
                       context
                           .read<InteractionHistoryCubit>()
                           .selectInteraction(interaction);
