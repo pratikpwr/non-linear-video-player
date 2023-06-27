@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ui/organisms/interactive_player/entities/interaction_entity.dart';
-import 'ui/organisms/interactive_player/screen/interactive_player.dart';
+import 'features/football_manager/presentation/screens/football_manager_trailer.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const InteractivePlayer(data: mock),
+      home: const FootBallManagerTrailer(),
     );
   }
 }

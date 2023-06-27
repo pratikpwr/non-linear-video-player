@@ -33,14 +33,12 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: _videoController.value.isInitialized
-            ? VideoPlayerItem(
-                controller: _chewieController,
-              )
-            : const Center(child: CircularProgressIndicator()),
-      ),
+    return SafeArea(
+      child: _videoController.value.isInitialized
+          ? VideoPlayerItem(
+              controller: _chewieController,
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 
