@@ -2,6 +2,53 @@
 
 A Non linear Video session player which provides interactive elements to the user, allowing them to make decisions that will dynamically impact the later parts of the video.
 
+
+# Features
+
+The Flutter application has 2 main features:
+
+## Interactive Player
+
+The `InteractivePlayer` widget provides an interactive video player with user interactions. To use this widget, follow the steps below:
+
+1. Import the `InteractivePlayer` widget.
+2. Create an instance of InteractionEntity to define the video and interactions:
+    ```
+    final interaction = InteractionEntity(
+      videoUrl: 'https://example.com/video.mp4',
+      title: 'Video Title',
+      question: 'Question to ask the user',
+      options: [
+        // List of InteractionEntity options if any
+      ],
+    );
+    ```
+3. Pass the interaction to the `InteractivePlayer` widget:
+    ```
+    InteractivePlayer(
+      initialInteraction: interaction,
+      onInteraction: (selectedInteraction) {
+        // Handle user interaction here
+      },
+    );
+    ```
+    - initialInteraction: The initial interaction to be shown on the video.
+    - onInteraction: A callback function that will be called when the user interacts with the video.
+
+## Interactive Player With History
+
+1. Import the `InteractivePlayerWithHistory` widget.
+2. create `InteractionEntity` as above.
+3. Use the InteractionPlayerWithHistory widget in your Flutter UI:
+    ```
+    InteractivePlayerWithHistory(
+      initialInteraction: interaction,
+    );
+    ```
+    - initialInteraction: The initial interaction to be shown on the video.
+    - This will show list of previous interactions below the video player.
+   
+
 # Pre-requisites
 
 Before proceeding with the installation and usage of the Flutter application, make sure you have the following pre-requisites:
@@ -65,48 +112,3 @@ lib
 │   └───app.dart
 └───main.dart
 ```
-
-# Features
-
-The Flutter application has 2 main features:
-
-## Interactive Player
-
-The `InteractivePlayer` widget provides an interactive video player with user interactions. To use this widget, follow the steps below:
-
-1. Import the `InteractivePlayer` widget.
-2. Create an instance of InteractionEntity to define the video and interactions:
-    ```
-    final interaction = InteractionEntity(
-      videoUrl: 'https://example.com/video.mp4',
-      title: 'Video Title',
-      question: 'Question to ask the user',
-      options: [
-        // List of InteractionEntity options if any
-      ],
-    );
-    ```
-3. Pass the interaction to the `InteractivePlayer` widget:
-    ```
-    InteractivePlayer(
-      initialInteraction: interaction,
-      onInteraction: (selectedInteraction) {
-        // Handle user interaction here
-      },
-    );
-    ```
-   - initialInteraction: The initial interaction to be shown on the video.
-   - onInteraction: A callback function that will be called when the user interacts with the video.
-
-## Interactive Player With History
-
-1. Import the `InteractivePlayerWithHistory` widget.
-2. create `InteractionEntity` as above.
-3. Use the InteractionPlayerWithHistory widget in your Flutter UI:
-    ```
-    InteractivePlayerWithHistory(
-      initialInteraction: interaction,
-    );
-    ```
-   - initialInteraction: The initial interaction to be shown on the video.
-   - This will show list of previous interactions below the video player.
