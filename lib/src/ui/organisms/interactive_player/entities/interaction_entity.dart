@@ -1,8 +1,6 @@
 class InteractiveEntity {
   final String videoUrl;
-
   final String title;
-
   final String? question;
   final List<InteractiveEntity> options;
 
@@ -34,6 +32,21 @@ const mock = InteractiveEntity(
           title: 'Negotiate Objective',
           question: null,
           options: [],
+        ),
+        InteractiveEntity(
+          videoUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+          title: 'Bee',
+          question: null,
+          options: [
+            InteractiveEntity(
+              videoUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+              title: 'Butterfly',
+              question: null,
+              options: [],
+            ),
+          ],
         ),
         InteractiveEntity(
           videoUrl:

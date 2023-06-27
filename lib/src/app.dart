@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'features/non_linear_video/domain/entities/interaction_entity.dart';
-import 'features/non_linear_video/presentation/screens/interactive_player.dart';
+import 'ui/organisms/interactive_player/entities/interaction_entity.dart';
+import 'ui/organisms/interactive_player/screen/interactive_player.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
