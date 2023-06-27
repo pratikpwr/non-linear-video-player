@@ -9,10 +9,12 @@ import '../widget/video_player_item.dart';
 class InteractivePlayer extends StatefulWidget {
   const InteractivePlayer({
     super.key,
-    required this.data,
+    required this.initialInteraction,
+    this.onInteraction,
   });
 
-  final InteractiveEntity data;
+  final InteractionEntity initialInteraction;
+  final Function(InteractionEntity)? onInteraction;
 
   @override
   State<InteractivePlayer> createState() => _InteractivePlayerState();
@@ -22,19 +24,31 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
   late VideoPlayerController _videoController;
   late ChewieController _chewieController;
 
-  late InteractiveEntity _currentInteraction;
+  late InteractionEntity _currentInteraction;
 
   @override
   void initState() {
     super.initState();
-    _currentInteraction = widget.data;
-    initializeVideo(widget.data.videoUrl);
+    _currentInteraction = widget.initialInteraction;
+    initializeVideo(widget.initialInteraction.videoUrl);
+  }
+
+  @override
+  void didUpdateWidget(covariant InteractivePlayer oldWidget) {
+    if (oldWidget.initialInteraction != widget.initialInteraction) {
+      _currentInteraction = widget.initialInteraction;
+      _videoController.removeListener(listener);
+      _videoController.dispose();
+      initializeVideo(widget.initialInteraction.videoUrl);
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return SafeArea(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.35,
         child: _videoController.value.isInitialized
             ? VideoPlayerItem(
                 controller: _chewieController,
@@ -68,7 +82,6 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
       setState(() {});
       _videoController.play();
     });
-
     _videoController.addListener(listener);
   }
 
@@ -89,9 +102,13 @@ class _InteractivePlayerState extends State<InteractivePlayer> {
       interactionInputDialog(context, res: _currentInteraction,
           onSelect: (interaction) {
         changeVideo(interaction.videoUrl);
+
         setState(() {
           _currentInteraction = interaction;
         });
+        if (widget.onInteraction != null) {
+          widget.onInteraction!(interaction);
+        }
       });
     }
   }
