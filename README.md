@@ -1,3 +1,7 @@
+# Interactive Video Player
+
+A Non linear Video session player which provides interactive elements to the user, allowing them to make decisions that will dynamically impact the later parts of the video.
+
 # Pre-requisites
 
 Before proceeding with the installation and usage of the Flutter application, make sure you have the following pre-requisites:
@@ -22,9 +26,9 @@ To install the Flutter application, follow these steps:
 
 The Flutter application follows the Clean Architecture design pattern and incorporates the following technologies:
 
-* Architecture: Clean Architecture
-* State Management: Cubits
-* Dependency Injection: GetIt
+* Architecture: [Clean Architecture](https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure/)
+* State Management: [Cubits](https://pub.dev/packages/flutter_bloc)
+* Dependency Injection: [GetIt](https://pub.dev/packages/get_it)
 
 # Folder Structure
 
