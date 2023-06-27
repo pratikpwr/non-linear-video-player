@@ -12,7 +12,7 @@ class FootballManagerTrailerInitial extends FootballManagerTrailerState {}
 class FootballManagerTrailerLoading extends FootballManagerTrailerState {}
 
 class FootballManagerTrailerLoaded extends FootballManagerTrailerState {
-  final InteractiveEntity data;
+  final InteractionEntity data;
 
   const FootballManagerTrailerLoaded(this.data);
 

@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/usecases/usecase.dart';
-import '../../../../ui/organisms/interactive_player/entities/interaction_entity.dart';
-import '../../domain/use_cases/get_football_manager_trailer_use_case.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../../../../../ui/organisms/interactive_player/entities/interaction_entity.dart';
+import '../../../domain/use_cases/get_football_manager_trailer_use_case.dart';
 
 part 'football_manager_trailer_state.dart';
 

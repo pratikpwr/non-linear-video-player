@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:non_linear_videos/src/ui/organisms/interactive_player/screen/interactive_player_with_history.dart';
 
 import '../../../../core/injector/injection_container.dart';
 import '../../../../ui/organisms/interactive_player/screen/interactive_player.dart';
-import '../cubits/football_manager_trailer_cubit.dart';
+import '../cubits/football_manager_trailer/football_manager_trailer_cubit.dart';
 
 class FootBallManagerTrailer extends StatelessWidget {
   const FootBallManagerTrailer({super.key});
@@ -21,7 +22,7 @@ class FootBallManagerTrailer extends StatelessWidget {
             } else if (state is FootballManagerTrailerError) {
               return Center(child: Text(state.message));
             } else if (state is FootballManagerTrailerLoaded) {
-              return InteractivePlayer(data: state.data);
+              return InteractionPlayerWithHistory(initialInteraction: state.data);
             } else {
               return const SizedBox.shrink();
             }

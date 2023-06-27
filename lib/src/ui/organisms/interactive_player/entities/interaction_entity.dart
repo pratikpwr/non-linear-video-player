@@ -1,10 +1,10 @@
-class InteractiveEntity {
+class InteractionEntity {
   final String videoUrl;
   final String title;
   final String? question;
-  final List<InteractiveEntity> options;
+  final List<InteractionEntity> options;
 
-  const InteractiveEntity({
+  const InteractionEntity({
     required this.videoUrl,
     required this.title,
     required this.question,

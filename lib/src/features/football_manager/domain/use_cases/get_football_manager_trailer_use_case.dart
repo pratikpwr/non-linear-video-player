@@ -6,13 +6,13 @@ import '../../../../ui/organisms/interactive_player/entities/interaction_entity.
 import '../repositories/football_manager_repository.dart';
 
 class FootBallManagerTrailerUseCase
-    implements UseCase<InteractiveEntity, NoParams> {
+    implements UseCase<InteractionEntity, NoParams> {
   final FootballManagerRepository repository;
 
   FootBallManagerTrailerUseCase(this.repository);
 
   @override
-  Future<Either<Failure, InteractiveEntity>> call(NoParams params) async {
+  Future<Either<Failure, InteractionEntity>> call(NoParams params) async {
     return await repository.footballMangerTrailer();
   }
 }

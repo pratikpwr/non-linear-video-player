@@ -17,7 +17,7 @@ class FootballManagerRepositoryImpl implements FootballManagerRepository {
   });
 
   @override
-  Future<Either<Failure, InteractiveEntity>> footballMangerTrailer() async =>
+  Future<Either<Failure, InteractionEntity>> footballMangerTrailer() async =>
       _result(
         () => dataSource.footballManagerTrailer(),
       );
